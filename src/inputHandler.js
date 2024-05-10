@@ -4,7 +4,7 @@ import fs from 'fs';
 function readFromFile(filePath) {
     try {
         const data = fs.readFileSync(filePath, 'utf8');
-        return data.trim(); 
+        return data; 
     } catch (err) {
         console.error(`Error reading file: ${err}`);
         process.exit(1); 
