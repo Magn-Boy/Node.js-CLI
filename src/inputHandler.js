@@ -1,4 +1,4 @@
-const fs = require('fs');
+import fs from 'fs';
 
 
 function readFromFile(filePath) {
@@ -29,7 +29,4 @@ function readFromStdin() {
     });
 }
 
-module.exports = {
-    readFromFile,
-    readFromStdin
-};
+export { readFromFile, readFromStdin };

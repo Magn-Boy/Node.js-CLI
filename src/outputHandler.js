@@ -1,4 +1,4 @@
-const fs = require('fs');
+import fs from 'fs';
 
 function writeToOutputFile(filePath, data) {
     try {
@@ -14,7 +14,4 @@ function writeToStdout(data) {
     process.stdout.write(data);
 }
 
-module.exports = {
-    writeToOutputFile,
-    writeToStdout
-};
+export { writeToOutputFile, writeToStdout };

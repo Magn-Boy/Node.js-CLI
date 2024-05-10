@@ -1,3 +1,5 @@
+import fs from 'fs';
+
 // Задача на преобразование строк
 function insideOut(str) {
     
@@ -8,7 +10,4 @@ function arrayDiff(arr1, arr2) {
     
 }
 
-module.exports = {
-    insideOut,
-    arrayDiff
-};
+export { insideOut, arrayDiff };

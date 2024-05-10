@@ -1,6 +1,6 @@
-const { insideOut, arrayDiff } = require('./solution');
-const { readFromFile, readFromStdin } = require('./inputHandler');
-const { writeToOutputFile, writeToStdout } = require('./outputHandler');
+import { insideOut, arrayDiff } from './solution.js';
+import { readFromFile, readFromStdin } from './inputHandler.js';
+import { writeToOutputFile, writeToStdout } from './outputHandler.js';
 
 const args = process.argv.slice(2);
 
