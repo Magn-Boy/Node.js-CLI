@@ -1,5 +1,5 @@
 import minimist from 'minimist';
-import { insideOut, arrayDiff } from './solution.js';
+import { insideOut, oddRow } from './solution.js';
 import { createReadStream, createWriteStream } from 'fs';
 import { pipeline } from 'stream/promises';
 import { Transform } from 'stream';
@@ -38,6 +38,9 @@ const handleInput = (input, output, task) => {
                         throw new Error('Должно быть 2 массива');
                     }
                     data = JSON.stringify(arrayDiff(arrays[0], arrays[1]));
+                } else if (task == 'oddRow') {
+                    const rowIndex = parseInt(chunk.toString());
+                    data = JSON.stringify(oddRow(rowIndex));
                 }
                 this.push(data);
                 callback();
