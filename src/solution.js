@@ -13,6 +13,7 @@ function insideOut(str) {
         let secondHalf = word.slice(mid + (len % 2)).split('').reverse().join('');
         return firstHalf + secondHalf;
     }
+    return words.map(processWord).join(' ');
 }
 
 // Задача на преобразование массивов

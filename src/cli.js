@@ -13,27 +13,38 @@ const args = minimist(process.argv.slice(2), {
 });
 
 const handleInput = (input, output, task) => {
+
+    if (typeof input !== 'string') {
+        console.error('Путь к входному файлу не задан или указан некорректно');
+        process.exit(1);
+    }
+
     const inputSrc = input ? createReadStream(input, 'utf8') : process.stdin;
     const outputSrc = output ? createWriteStream(output) : process.stdout;
 
-    transformStream = new Transform({
+    const transformStream = new Transform({
         transform(chunk, encoding, callback) {
+            if (chunk === undefined || typeof chunk !== 'string') {
+                return callback();
+            }
+        
             let data;
-            if (task === 'insideOut') {
-                data = insideOut(chunk.toString());
-            } else if (task === 'arrayDiff') {
-                try {
+            try {
+                if (task === 'insideOut') {
+                    data = insideOut(chunk.toString());
+                } else if (task === 'arrayDiff') {
                     const arrays = JSON.parse(chunk.toString());
                     if (arrays.length !== 2) {
                         throw new Error('Должно быть 2 массива');
                     }
                     data = JSON.stringify(arrayDiff(arrays[0], arrays[1]));
-                } catch (err) {
-                    return callback(err);
                 }
+                this.push(data);
+                callback();
+            } catch (err) {
+                console.error('Ошибка во время обработки данных:', err);
+                callback(err);
             }
-            this.push(data);
-            callback();
         },
         readableObjectMode: true,
         writableObjectMode: true
